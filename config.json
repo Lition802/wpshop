@@ -1,0 +1,9 @@
+{
+    "port":8888,
+    "allow_cros":true,
+    "default":{
+        "shop_name":"{name}的商店",
+        "shop_desc":"欢迎来到{name}的商店"
+    },
+    "plugins":[]
+}
