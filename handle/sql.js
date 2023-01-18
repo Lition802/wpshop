@@ -139,12 +139,13 @@ function removeCount(xuid,item_id,count){
 }
 
 function formatShop(data){
-    
+    let all_item = getAllItem(data.OWNER);
     return {
         id:data.ID,
         name: data.NAME,
         desc:data.DESC,
         owner: data.OWNER,
+        count: all_item.length,
         total: data.TOTAL
     }
 }
