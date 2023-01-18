@@ -35,7 +35,6 @@ function parseEnch(tag) {
 
 function stringifyEnch(ench) {
     let msg = '';
-    console.log(ench);
     for (const e of JSON.parse(ench)) {
         msg += `\n${[
             "保护",

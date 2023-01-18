@@ -125,7 +125,7 @@ function removeCount(xuid,item_id,count){
     if(has_count == count){
         // 等于
         db.prepare(`DELETE FROM "${xuid}" WHERE ID=@item_id;`).run({item_id});
-        addTotal(xuid,total);
+
         return {success:true};
     }else if (has_count > count){
         // 大于
@@ -139,7 +139,7 @@ function removeCount(xuid,item_id,count){
 }
 
 function formatShop(data){
-    console.log(data)
+    
     return {
         id:data.ID,
         name: data.NAME,
@@ -200,5 +200,6 @@ module.exports = {
     pwd_right,
     getshopinfo,
     setshopinfo,
-    addBill
+    addBill,
+    addTotal
 }

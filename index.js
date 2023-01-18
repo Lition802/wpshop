@@ -14,7 +14,8 @@ const login = require('./route/login');
 const getshopinfo = require('./route/shopinfo_g');
 const setshopinfo = require('./route/shopinfo_p');
 const buy = require('./route/buy');
-const offlinemoney = require('./route/offlinemoney')
+const offlinemoney = require('./route/offlinemoney');
+const download = require('./route/download');
 
 app.post('/register',register);
 app.post('/upload',upload);
@@ -24,18 +25,22 @@ app.post('/login',login);
 app.post('/shopinfo/:shopid',setshopinfo);
 app.get('/shopinfo/:shopid',getshopinfo);
 app.post('/buy',buy);
-app.post('/offlinemoney',offlinemoney)
+app.post('/offlinemoney',offlinemoney);
+app.post('/download',download);
 
 if (config.allow_cros) {
     //设置允许跨域访问该服务.
-    app.all('*', (req, res, next)=> {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Headers', 'Content-Type');
-        res.header('Access-Control-Allow-Methods', '*');
-        res.header('Content-Type', 'application/json;charset=utf-8');
-        next();
-    });
+    
 }
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'Authorization,X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method' )
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PATCH, PUT, DELETE')
+    res.header('Allow', 'GET, POST, PATCH, OPTIONS, PUT, DELETE')
+    next();
+    });
+
 
 app.get('*', (req, res)=> {
     res.json({code:404,msg:"api not found"});

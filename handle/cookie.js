@@ -1,5 +1,5 @@
 const stringRandom = require('string-random');
-const {db} = require('./sql');
+const {db, exsist} = require('./sql');
 
 function update(xuid){
     let ck = stringRandom(8);
@@ -14,10 +14,11 @@ function update(xuid){
 
 function get(xuid){
     let rt = db.prepare(`SELECT CK FROM COOKIES WHERE XUID = @xuid;`).all({xuid});
+    let {name} = exsist(xuid);
     if(rt.length == 0){
         return {success:false}
     }else{
-        return {success:true,token:rt[0].CK};
+        return {success:true,token:rt[0].CK,name};
     }
 }
 

@@ -19,7 +19,8 @@ router.post('/buy',(req,res)=>{
             if(all_item[i].id == item_id){
                 if(all_item[i].count >= count){
                     sql.removeCount(target,item_id,count);
-                    sql.addBill(xuid,target,all_item[i].type,count,all_item[i].price)
+                    sql.addBill(xuid,target,all_item[i].type,count,all_item[i].price);
+                    sql.addTotal(xuid,count*all_item[i].price);
                     res.json({code:0,success:true});
                     return;
                 }else{
