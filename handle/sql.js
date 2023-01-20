@@ -183,6 +183,17 @@ function setshopinfo(xuid,name,desc){
     }
 }
 
+function setiteminfo(xuid,item_id,type,data){
+    switch(type){
+        case 0:
+            db.prepare(`UPDATE "${xuid}" SET COUNT=@data WHERE ID = @item_id;`).run({data,item_id});
+            break;
+        case 1:
+            db.prepare(`UPDATE "${xuid}" SET ICON=@data WHERE ID = @item_id;`).run({data,item_id});
+            break;
+    }
+}
+
 // {Count:1,Damage:0,Name:minecraft:stone_sword,WasPickedUp:0,tag:{Damage:0}}
 // {Count:64,Damage:0,Name:minecraft:donkey_spawn_egg,WasPickedUp:0}
 
@@ -202,5 +213,6 @@ module.exports = {
     getshopinfo,
     setshopinfo,
     addBill,
-    addTotal
+    addTotal,
+    setiteminfo
 }

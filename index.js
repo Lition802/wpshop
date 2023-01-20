@@ -31,6 +31,7 @@ const setshopinfo = require('./route/shopinfo_p');
 const buy = require('./route/buy');
 const offlinemoney = require('./route/offlinemoney');
 const download = require('./route/download');
+const setiteminfo = require('./route/setiteminfo');
 
 app.post('/register', register);
 app.post('/upload', upload);
@@ -42,6 +43,7 @@ app.get('/shopinfo/:shopid', getshopinfo);
 app.post('/buy', buy);
 app.post('/offlinemoney', offlinemoney);
 app.post('/download', download);
+app.post('/setiteminfo',setiteminfo);
 
 
 

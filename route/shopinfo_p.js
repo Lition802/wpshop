@@ -7,7 +7,6 @@ const router = express.Router();
 router.post('/shopinfo/:shopid',(req,res)=>{
     let {token,name,desc,xuid} = req.body;
     let id = req.params.shopid;
-    console.log(token);
     if(token != get(xuid).token){
         res.json({code:401,msg:'client ket not right'});
         return;

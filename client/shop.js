@@ -56,4 +56,21 @@ class User{
             callback(err,null);
         })
     }
+    set_item_info(item_id,type,data,callback){
+        let postdata = {item_id,xuid:this.xuid,token:this.#cookie};
+        switch(type){
+            case 'count':
+                postdata.count = data;
+                break;
+            case 'icon':
+                postdata.icon = data;
+                break;
+        }
+        axios(this.url+'/setiteminfo',postdata).then(res=>{
+            const { status, statusText, data } = res;
+            callback(null,data);
+        }).catch(err=>{
+            callback(err,null);
+        })
+    }
 }
