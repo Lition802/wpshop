@@ -72,7 +72,7 @@ function setup(xuid){
         // 设置商店信息
     
         let {shop_name,shop_desc} = config.default;
-        db.prepare(`INSERT INTO SHOPS VALUES(NULL,@name,@desc,@xuid,0,"textures/items/book_portfolio.png")`).run({xuid,name:shop_name.replace("{name}",name),desc:shop_desc.replace('{name}',name)});
+        db.prepare(`INSERT INTO SHOPS VALUES(NULL,@name,@desc,@xuid,0,"textures/items/book_portfolio")`).run({xuid,name:shop_name.replace("{name}",name),desc:shop_desc.replace('{name}',name)});
         return true;
     }else{
         return false;
