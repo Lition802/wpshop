@@ -32,6 +32,7 @@ const buy = require('./route/buy');
 const offlinemoney = require('./route/offlinemoney');
 const download = require('./route/download');
 const setiteminfo = require('./route/setiteminfo');
+const async = require('./route/async');
 
 app.post('/register', register);
 app.post('/upload', upload);
@@ -44,7 +45,7 @@ app.post('/buy', buy);
 app.post('/offlinemoney', offlinemoney);
 app.post('/download', download);
 app.post('/setiteminfo',setiteminfo);
-
+app.get('/async/:token',async);
 
 
 

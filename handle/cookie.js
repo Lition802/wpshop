@@ -22,4 +22,13 @@ function get(xuid){
     }
 }
 
-module.exports = {update,get};
+function getxuid(token){
+    let rt = db.prepare(`SELECT CK,XUID FROM COOKIES WHERE CK = @token;`).all({token});
+    if(rt.length == 0){
+        return {success:false}
+    }else{
+        return {success:true,xuid:rt[0].XUID};
+    }
+}
+
+module.exports = {update,get,getxuid};

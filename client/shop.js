@@ -4,7 +4,7 @@ class SHOP {
         this.url = url;
     }
     get_shop_list(callback) {
-        axios(url + '/shop_list').then(res => {
+        axios(this.url + '/shop_list').then(res => {
             const { data } = res;
             callback(null, data);
         }).catch(err => {
@@ -32,17 +32,23 @@ class SHOP {
 class User{
     xuid;
     url;
-    #cookie;
-    has_login = false;
-    constructor(url,xuid){
-        this.xuid = xuid;
+    constructor(url){
         this.url = url;
     }
-    login(pwd,callback){
-        let send_pwd = pwd;// 请自行实现加密方法
-        axios.post(url+'/login',{xuid,pwd:send_pwd}).then(res=>{
+    async(token,callback){
+        axios.get(this.url+'/async/'+token).then(res=>{
             const { status, statusText, data } = res;
-            if(data.code == 0){this.#cookie = data.data.cookie;this.has_login = true;}
+            if(data.code == 0){this.xuid = data.xuid};
+            callback(null, data);
+        }).catch(err=>{
+            callback(err,null);
+        })
+    }
+    login(xuid,pwd,callback){
+        this.xuid = xuid;
+        let send_pwd = pwd;// 请自行实现加密方法
+        axios.post(this.url+'/login',{xuid:this.xuid,pwd:send_pwd}).then(res=>{
+            const { status, statusText, data } = res;
             callback(null, data);
         }).catch(err=>{
             callback(err,null);
@@ -56,8 +62,8 @@ class User{
             callback(err,null);
         })
     }
-    set_item_info(item_id,type,data,callback){
-        let postdata = {item_id,xuid:this.xuid,token:this.#cookie};
+    set_item_info(item_id,type,data,token,callback){
+        let postdata = {item_id,xuid:this.xuid,token};
         switch(type){
             case 'count':
                 postdata.count = data;
